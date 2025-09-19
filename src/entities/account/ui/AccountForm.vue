@@ -58,10 +58,12 @@
             placeholder="Введите пароль"
             variant="outlined"
             density="compact"
-            type="password"
+            :type="showPassword ? 'text' : 'password'"
             :counter="100"
             :error="!!account.errors.password"
             :error-messages="account.errors.password"
+            :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append-inner="showPassword = !showPassword"
           />
         </v-col>
 
@@ -81,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import type { AccountWithValidation, RecordType } from '@/shared/types'
 import { tagsToString, parseTagsString } from '@/shared/utils'
 
@@ -99,13 +101,13 @@ interface Emits {
 const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
 
-// Опции для селекта типа записи
+const showPassword = ref(false)
+
 const recordTypeOptions = [
   { title: 'Локальная', value: 'Локальная' as RecordType },
   { title: 'LDAP', value: 'LDAP' as RecordType }
 ]
 
-// Преобразуем теги в строку для отображения
 const tagsString = computed(() => tagsToString(props.account.tags))
 
 // Обработчики событий
