@@ -1,29 +1,40 @@
-# .
 
-This template should help get you started developing with Vue 3 in Vite.
+# Account Manager (Vue 3 + TypeScript + Pinia + Vuetify)
 
-## Recommended IDE Setup
+## Описание
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Веб-приложение для управления учетными записями. Реализована форма добавления, редактирования и удаления учетных записей с поддержкой валидации и сохранения данных в localStorage.  
+Стек: Vue 3 (Composition API), TypeScript, Pinia, Vuetify.
 
-## Customize configuration
+### Основной функционал
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- Добавление, редактирование и удаление учетных записей.
+- Валидация полей (метка, логин, пароль, тип записи).
+- Поддержка типов записи: "Локальная" и "LDAP".
+- Метка хранится как массив объектов (`{ text: string }`), ввод через `;`.
+- Сохранение данных в localStorage и восстановление при обновлении страницы.
+- Современный UI на Vuetify.
 
-## Project Setup
+## Установка и запуск
+
+### 1. Клонируйте репозиторий
+
+```sh
+git clone <ваш-репозиторий>
+cd <ваша-папка>
+```
+
+### 2. Установите зависимости
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### 3. Запустите проект для разработки
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
 
-```sh
-npm run build
-```
+Оперативная обратная связь: https://t.me/moramova
