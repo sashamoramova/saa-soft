@@ -6,17 +6,14 @@ import { validateAccount, hasValidationErrors, parseTagsString } from '@/shared/
 const STORAGE_KEY = 'accounts'
 
 export const useAccountsStore = defineStore('accounts', () => {
-  // State
   const accounts = ref<AccountWithValidation[]>([])
 
-  // Getters
   const validAccounts = computed(() => 
     accounts.value.filter(account => account.isValid)
   )
 
   const accountsCount = computed(() => accounts.value.length)
 
-  // Actions
   function createEmptyAccount(): AccountWithValidation {
     return {
       id: generateId(),
@@ -37,20 +34,15 @@ export const useAccountsStore = defineStore('accounts', () => {
   }
 
   function updateAccount(id: string, updates: Partial<Account>): void {
-    const accountIndex = accounts.value.findIndex(acc => acc.id === id)
-    if (accountIndex === -1) return
-
-    const account = accounts.value[accountIndex]
+    const account = accounts.value.find(acc => acc.id === id)
+    if (!account) return
     
-    // Обновляем данные
     Object.assign(account, updates)
     
-    // Обрабатываем пароль в зависимости от типа записи
     if (updates.recordType === 'LDAP') {
       account.password = null
     }
     
-    // Валидируем
     validateAccountInStore(id)
     saveToStorage()
   }
@@ -107,7 +99,6 @@ export const useAccountsStore = defineStore('accounts', () => {
           isValid: false
         }))
         
-        // Валидируем все загруженные записи
         accounts.value.forEach(account => {
           validateAccountInStore(account.id)
         })
@@ -123,21 +114,16 @@ export const useAccountsStore = defineStore('accounts', () => {
     saveToStorage()
   }
 
-  // Вспомогательная функция для генерации ID
   function generateId(): string {
     return Date.now().toString(36) + Math.random().toString(36).substr(2)
   }
 
-  // Инициализация - загружаем данные при создании стора
   loadFromStorage()
 
   return {
-    // State
     accounts,
-    // Getters
     validAccounts,
     accountsCount,
-    // Actions
     addAccount,
     updateAccount,
     updateAccountTags,

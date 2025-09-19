@@ -1,5 +1,3 @@
-// Типы для учетных записей
-
 export enum RecordType {
   LDAP = 'LDAP',
   LOCAL = 'Локальная'
