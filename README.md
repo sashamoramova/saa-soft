@@ -1,5 +1,5 @@
 
-# Account Manager (Vue 3 + TypeScript + Pinia + Vuetify)
+# Account Manager (Vue 3 + TypeScript + Pinia)
 
 ## Описание
 
