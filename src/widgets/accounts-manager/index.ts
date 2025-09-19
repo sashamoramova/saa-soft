@@ -1,0 +1,1 @@
+export { default as AccountsManager } from './ui/AccountsManager.vue'
